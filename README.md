@@ -2,6 +2,10 @@
 A MiSTer FPGA implementation of Pinball Action, the 1985 arcade game developed by Tehkan (later Tecmo).
 This core recreates the original arcade hardware using FPGA logic and is intended for preservation, research, and enjoyment on MiSTer FPGA hardware.
 
+<p align="center">
+  <img src="https://github.com/net-beui/Arcade-PinballAction/blob/main/pbaction-small.png" />
+</p>
+
 ## Features
 - Z80 main CPU
 - Z80 sound CPU
