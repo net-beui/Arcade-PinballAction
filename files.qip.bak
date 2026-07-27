@@ -1,0 +1,18 @@
+# Top-level emu wrapper
+set_global_assignment -name SYSTEMVERILOG_FILE PinballAction.sv
+
+# SDC timing constraints
+set_global_assignment -name SDC_FILE PinballAction.sdc
+
+# Core RTL
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/pbaction.sv
+set_global_assignment -name VERILOG_FILE       rtl/pbaction_cpu.v
+set_global_assignment -name VERILOG_FILE       rtl/pbaction_sound.v
+set_global_assignment -name VERILOG_FILE       rtl/pbaction_video.v
+set_global_assignment -name VERILOG_FILE       rtl/pbaction_fg.v
+set_global_assignment -name VERILOG_FILE       rtl/pbaction_bg.v
+set_global_assignment -name VERILOG_FILE       rtl/pbaction_sprites.v
+set_global_assignment -name VERILOG_FILE       rtl/pbaction_palette.v
+
+# Memory primitives
+set_global_assignment -name VERILOG_FILE       rtl/dpram.v

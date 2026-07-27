@@ -1,0 +1,116 @@
+Flow report for PinballAction
+Thu Jun 25 17:56:28 2026
+Quartus Prime Version 17.0.2 Build 602 07/19/2017 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+  8. Flow Messages
+  9. Flow Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++---------------------------------------------------------------------------+
+; Flow Summary                                                              ;
++-----------------------------+---------------------------------------------+
+; Flow Status                 ; Flow Failed - Thu Jun 25 17:56:28 2026      ;
+; Quartus Prime Version       ; 17.0.2 Build 602 07/19/2017 SJ Lite Edition ;
+; Revision Name               ; PinballAction                               ;
+; Top-level Entity Name       ; sys_top                                     ;
+; Family                      ; Cyclone V                                   ;
+; Device                      ; 5CGXFC7C7F23C8                              ;
+; Timing Models               ; Final                                       ;
+; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
+; Total registers             ; N/A until Partition Merge                   ;
+; Total pins                  ; N/A until Partition Merge                   ;
+; Total virtual pins          ; N/A until Partition Merge                   ;
+; Total block memory bits     ; N/A until Partition Merge                   ;
+; Total PLLs                  ; N/A until Partition Merge                   ;
+; Total DLLs                  ; N/A until Partition Merge                   ;
++-----------------------------+---------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 06/25/2026 17:56:19 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; PinballAction       ;
++-------------------+---------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                            ;
++-----------------------------------------+----------------------------------------+---------------+-------------+------------+
+; Assignment Name                         ; Value                                  ; Default Value ; Entity Name ; Section Id ;
++-----------------------------------------+----------------------------------------+---------------+-------------+------------+
+; ALM_REGISTER_PACKING_EFFORT             ; High                                   ; Medium        ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                   ; 31366889965806.178243537916504         ; --            ; --          ; --         ;
+; FITTER_EFFORT                           ; Fast Fit                               ; Auto Fit      ; --          ; --         ;
+; OPTIMIZATION_MODE                       ; Aggressive Area                        ; Balanced      ; --          ; --         ;
+; OPTIMIZATION_TECHNIQUE                  ; Area                                   ; Balanced      ; --          ; --         ;
+; PARTITION_COLOR                         ; -- (Not supported for targeted family) ; --            ; sys_top     ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL     ; -- (Not supported for targeted family) ; --            ; sys_top     ; Top        ;
+; PARTITION_NETLIST_TYPE                  ; -- (Not supported for targeted family) ; --            ; sys_top     ; Top        ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC_FOR_AREA ; On                                     ; Off           ; --          ; --         ;
+; QII_AUTO_PACKED_REGISTERS               ; Normal                                 ; Auto          ; --          ; --         ;
+; TOP_LEVEL_ENTITY                        ; sys_top                                ; PinballAction ; --          ; --         ;
++-----------------------------------------+----------------------------------------+---------------+-------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                        ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis ; 00:00:10     ; 1.0                     ; 4767 MB             ; 00:00:22                           ;
+; Total                ; 00:00:10     ; --                      ; --                  ; 00:00:22                           ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                    ;
++----------------------+------------------+------------+------------+----------------+
+; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
++----------------------+------------------+------------+------------+----------------+
+; Analysis & Synthesis ; Sal-PC           ; Windows 10 ; 10.0       ; x86_64         ;
++----------------------+------------------+------------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off PinballAction -c PinballAction
+
+
+

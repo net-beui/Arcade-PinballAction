@@ -1,0 +1,9 @@
+<srf version="1.0">
+  <rule id="10030" action="suppress"/>
+  <rule id="12125" action="suppress"/>
+  <rule id="12128" action="suppress"/>
+  <rule id="13410" action="suppress"/>
+  <rule id="15610" action="suppress"/>
+  <rule id="292013" action="suppress"/>
+  <rule id="292014" action="suppress"/>
+</srf>
