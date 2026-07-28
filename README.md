@@ -12,7 +12,7 @@ This core recreates the original arcade hardware using FPGA logic and is intende
 - Three AY-3-8910 compatible sound generators
 - Hardware tilemap and sprite rendering
 - Background scrolling
-- Cocktail/flip-screen support
+- Flip-screen support
 - MiSTer FPGA framework integration
 - MRA-based ROM loading
 - HDMI and analog video support
