@@ -1,0 +1,149 @@
+# ============================================================
+# Quartus generated directories
+# ============================================================
+
+db/
+incremental_db/
+output_files/
+
+# ============================================================
+# Quartus workspace and state files
+# ============================================================
+
+*.qws
+*.done
+*.cdf
+
+# ============================================================
+# Quartus generated reports and databases
+# ============================================================
+
+*.rpt
+*.summary
+*.smsg
+*.qmsg
+*.pin
+*.jdi
+*.sld
+*.hif
+*.html
+*.xml
+*.ammdb
+*.rdb
+*.cdb
+*.hdb
+*.idb
+*.ddb
+*.tdb
+*.logdb
+*.kpt
+*.bpm
+*.db_info
+*.hier_info
+*.tmw_info
+*.taw
+*.sci
+*.hsd
+*.tdf
+*.txt
+*.json
+
+# ============================================================
+# FPGA programming and build output files
+# ============================================================
+
+*.sof
+*.pof
+*.rbf
+*.jic
+
+# ============================================================
+# ROMs and copyrighted game data
+# ============================================================
+
+*.bin
+*.rom
+*.zip
+*.7z
+
+# ============================================================
+# Screenshots, captures, and local image output
+# ============================================================
+
+*-screen.png
+*.bmp
+*.jpg
+*.jpeg
+*.gif
+
+# Keep repository artwork/screenshots only if explicitly added by force
+# Example: git add -f docs/screenshot.png
+
+# ============================================================
+# Backup, temporary, and editor files
+# ============================================================
+
+*.bak
+*.bak1
+*.bak2
+*.orig
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ============================================================
+# Personal source snapshots and manual baselines
+# Use Git commits/tags instead of keeping these files in the repo
+# ============================================================
+
+*.Baseline*
+*.FirstTimeBooting
+*.TryToFixBallIssue
+*.BaselineGoodColours
+*.BaselineBooting
+*.BaselineNew
+*.BaselineFirstSound
+*.BaselineNext
+*.BaselineSoundGood
+*.BaselineTitleScreenAlmostPerfect
+*.sal
+
+# ============================================================
+# SignalTap generated or stripped files
+# Keep hand-authored .stp files if you want them in the repo
+# ============================================================
+
+*_auto_stripped.stp
+
+# ============================================================
+# Local framework or project backups
+# ============================================================
+
+sys_backup/
+
+# ============================================================
+# Allow important project/source files through broader ignore patterns
+# ============================================================
+
+!README.md
+!LICENSE
+!LICENSE.*
+!*.mra
+!*.qpf
+!*.qsf
+!*.sdc
+!*.srf
+!*.sv
+!*.v
+!*.vhd
+!*.vh
+!*.qip
+!*.tcl
+!*.stp
+!rtl/**/*.txt
+!docs/**/*.txt
+!PinballAction_description.txt
