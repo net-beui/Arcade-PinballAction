@@ -62,7 +62,6 @@ Implemented and working:
 - Screen flip support
 - MRA ROM loading
 - HDMI and analog video support
-- Per-layer alignment controls for tuning and verification
 
 ### Known Issues
 
