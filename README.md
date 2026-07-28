@@ -33,7 +33,7 @@ This core recreates the original arcade hardware using FPGA logic and is intende
 ## ROM Requirements
 This project requires the original arcade ROMs, which are not included.
 Users must provide their own legally obtained ROM images.
-The core expects the standard MAME pbaction.zip ROM set through the supplied MRA file.
+The core expects the standard MAME pbaction.zip ROM set which is loaded through the supplied MRA file.
 
 ## Building
 Requirements
