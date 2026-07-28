@@ -16,7 +16,7 @@ This core recreates the original arcade hardware using FPGA logic and is intende
 - MiSTer FPGA framework integration
 - MRA-based ROM loading
 - HDMI and analog video support
-- Per-layer alignment controls for hardware tuning
+- Analog horizontal/vertical adjustment controls
 
 ## Hardware Summary
 | Component | Details |
