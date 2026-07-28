@@ -42,7 +42,7 @@ Requirements
 - DE10-Nano
 
 Build Steps
-1. ```git clone --recurse-submodules https://github.com/net-beui/PinballAction_MiSTer```
+1. ```git clone --recurse-submodules https://github.com/net-beui/Arcade-PinballAction```
 2. Open ```PinballAction.qpf```
 3. Compile using Quartus Prime and load the resulting .rbf onto MiSTer
 
