@@ -59,6 +59,7 @@ localparam CONF_STR = {
     "PinballAction;;",
      "-;",
     "O2,Flip,Off,On;",
+    "OU,Flippers,Normal,Split Controllers;",
     "-;",
     "O48,Analog HPos,0,+1,+2,+3,+4,+5,+6,+7,+8,+9,+10,+11,+12,+13,+14,+15,-16,-15,-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1;",
     "O9D,Analog VPos,0,+1,+2,+3,+4,+5,+6,+7,+8,+9,+10,+11,+12,+13,+14,+15,-16,-15,-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1;",
@@ -97,6 +98,7 @@ wire  signed   [8:0] h_pos_adj_osd = status_s5_to_s9(status[8:4]);
 wire  signed   [8:0] v_pos_adj_osd = status_s5_to_s9(status[13:9]);
 
 wire  osd_flip = status[2];
+wire  split_flippers = status[30];
 
 // Layer alignment baselines
 // Flip and non-flip modes require different offsets to keep
@@ -285,20 +287,29 @@ wire [15:0] audio_l, audio_r;
 
 //////////////////////////////////////////////////////////////////
 // MiSTer input mapping
+//
+// Normal mode:
+//   Controller 1 controls P1
+//   Controller 2 controls P2
+//
+// Split Controllers mode:
+//   Controller 1 controls the left flipper
+//   Controller 2 controls the right flipper
+//   Launch and nudge can be triggered from either controller
 //////////////////////////////////////////////////////////////////
 
 wire p1_flipper_l = joy0[4];
-wire p1_flipper_r = joy0[5];
-wire p1_launch    = joy0[6];
-wire p1_nudge     = joy0[7];
+wire p1_flipper_r = split_flippers ? joy1[5] : joy0[5];
+wire p1_launch    = split_flippers ? (joy0[6] | joy1[6]) : joy0[6];
+wire p1_nudge     = split_flippers ? (joy0[7] | joy1[7]) : joy0[7];
 
 wire p2_flipper_l = joy1[4];
 wire p2_flipper_r = joy1[5];
 wire p2_launch    = joy1[6];
 wire p2_nudge     = joy1[7];
 
-wire p1_start     = joy0[8] | joy1[8];
-wire p2_start     = joy0[9] | joy1[9];
+wire p1_start     = joy0[8]  | joy1[8];
+wire p2_start     = joy0[9]  | joy1[9];
 
 wire coin1        = joy0[10] | joy1[10];
 wire pause_btn    = joy0[11] | joy1[11];
