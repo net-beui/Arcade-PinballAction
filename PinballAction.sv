@@ -25,10 +25,12 @@ assign    {SD_SCK, SD_MOSI, SD_CS}         =  'Z;
 assign    {SDRAM_DQ, SDRAM_A, SDRAM_BA, SDRAM_CLK, SDRAM_CKE,
           SDRAM_DQML, SDRAM_DQMH, SDRAM_nWE, SDRAM_nCAS,
           SDRAM_nRAS, SDRAM_nCS}        = 'Z;
-assign    {DDRAM_CLK, DDRAM_BURSTCNT, DDRAM_ADDR, DDRAM_DIN,
-          DDRAM_BE, DDRAM_RD, DDRAM_WE}  = '0;
+// assign    {DDRAM_CLK, DDRAM_BURSTCNT, DDRAM_ADDR, DDRAM_DIN,
+//           DDRAM_BE, DDRAM_RD, DDRAM_WE}  = '0;
+// DDRAM driven by screen_rotate
 
-assign VGA_SL           = 0;
+// assign VGA_SL           = 0;
+// VGA_SL driven by arcade_video
 assign VGA_F1           = 0;
 assign VGA_SCALER       = 0;
 assign VGA_DISABLE      = 0;
@@ -59,6 +61,7 @@ localparam CONF_STR = {
     "PinballAction;;",
      "-;",
     "O2,Flip,Off,On;",
+    "OFG,Rotate,None,CW 90,180,CCW 90;",
     "OU,Flippers,Normal,Split Controllers;",
     "-;",
     "O48,Analog HPos,0,+1,+2,+3,+4,+5,+6,+7,+8,+9,+10,+11,+12,+13,+14,+15,-16,-15,-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1;",
@@ -99,6 +102,16 @@ wire  signed   [8:0] v_pos_adj_osd = status_s5_to_s9(status[13:9]);
 
 wire  osd_flip = status[2];
 wire  split_flippers = status[30];
+wire  [1:0] rotate_osd = status[16:15];
+
+// Rotation decode:
+//   00 = None:   no_rotate=1, rotate_ccw=x, flip=0
+//   01 = CW 90:  no_rotate=0, rotate_ccw=0, flip=0
+//   10 = 180:    no_rotate=1, rotate_ccw=x, flip=1
+//   11 = CCW 90: no_rotate=0, rotate_ccw=1, flip=0
+wire rotate_no     = (rotate_osd == 2'b00) || (rotate_osd == 2'b10);
+wire rotate_ccw    = (rotate_osd == 2'b11);
+wire rotate_flip   = (rotate_osd == 2'b10);
 
 // Layer alignment baselines
 // Flip and non-flip modes require different offsets to keep
@@ -402,17 +415,77 @@ pbaction pbaction (
 // MiSTer Video Output
 //////////////////////////////////////////////////////////////////
 
-assign CLK_VIDEO  = clk_vid;
-assign CE_PIXEL   = ce_pix;
+// Intermediate wires between arcade_video and screen_rotate
+wire        av_clk_video;
+wire        av_ce_pixel;
+wire  [7:0] av_vga_r, av_vga_g, av_vga_b;
+wire        av_vga_hs, av_vga_vs, av_vga_de;
+wire  [1:0] av_vga_sl;
 
-assign VGA_DE     = ~(HBlank | VBlank);
-assign VGA_HS     = HSync;
-assign VGA_VS     = VSync;
+arcade_video #(.WIDTH(256), .DW(12)) arcade_video (
+    .clk_video        (clk_vid),
+    .ce_pix           (ce_pix),
+    .RGB_in           ({R, G, B}),
+    .HBlank           (HBlank),
+    .VBlank           (VBlank),
+    .HSync            (HSync),
+    .VSync            (VSync),
+    .CLK_VIDEO        (av_clk_video),
+    .CE_PIXEL         (av_ce_pixel),
+    .VGA_R            (av_vga_r),
+    .VGA_G            (av_vga_g),
+    .VGA_B            (av_vga_b),
+    .VGA_HS           (av_vga_hs),
+    .VGA_VS           (av_vga_vs),
+    .VGA_DE           (av_vga_de),
+    .VGA_SL           (av_vga_sl),
+    .fx               (3'b000),
+    .forced_scandoubler(forced_scandoubler),
+    .gamma_bus        ()
+);
 
-// Expand 4-bit color to 8-bit for the framework
-assign VGA_R = {R, R};
-assign VGA_G = {G, G};
-assign VGA_B = {B, B};
+wire video_rotated;
+
+screen_rotate screen_rotate (
+    .CLK_VIDEO        (av_clk_video),
+    .CE_PIXEL         (av_ce_pixel),
+    .VGA_R            (av_vga_r),
+    .VGA_G            (av_vga_g),
+    .VGA_B            (av_vga_b),
+    .VGA_HS           (av_vga_hs),
+    .VGA_VS           (av_vga_vs),
+    .VGA_DE           (av_vga_de),
+    .rotate_ccw       (rotate_ccw),
+    .no_rotate        (rotate_no),
+    .flip             (rotate_flip),
+    .video_rotated    (video_rotated),
+    .FB_EN            (FB_EN),
+    .FB_FORMAT        (FB_FORMAT),
+    .FB_WIDTH         (FB_WIDTH),
+    .FB_HEIGHT        (FB_HEIGHT),
+    .FB_BASE          (FB_BASE),
+    .FB_STRIDE        (FB_STRIDE),
+    .FB_VBL           (FB_VBL),
+    .FB_LL            (FB_LL),
+    .DDRAM_CLK        (DDRAM_CLK),
+    .DDRAM_BUSY       (DDRAM_BUSY),
+    .DDRAM_BURSTCNT   (DDRAM_BURSTCNT),
+    .DDRAM_ADDR       (DDRAM_ADDR),
+    .DDRAM_DIN        (DDRAM_DIN),
+    .DDRAM_BE         (DDRAM_BE),
+    .DDRAM_WE         (DDRAM_WE),
+    .DDRAM_RD         (DDRAM_RD)
+);
+
+assign CLK_VIDEO = av_clk_video;
+assign CE_PIXEL  = av_ce_pixel;
+assign VGA_R     = av_vga_r;
+assign VGA_G     = av_vga_g;
+assign VGA_B     = av_vga_b;
+assign VGA_HS    = av_vga_hs;
+assign VGA_VS    = av_vga_vs;
+assign VGA_DE    = av_vga_de;
+assign VGA_SL    = av_vga_sl;
 
 //////////////////////////////////////////////////////////////////
 // MiSTer Audio Output
@@ -428,8 +501,12 @@ assign AUDIO_MIX  = 0;
 // Vertical game displayed in 3:4 portrait aspect ratio
 //////////////////////////////////////////////////////////////////
 
-assign VIDEO_ARX  = 13'd4;
-assign VIDEO_ARY  = 13'd3;
+// Aspect ratio depends on rotation state
+// No rotation / 180: portrait game, 3:4 width:height
+// CW90 / CCW90: screen_rotate outputs landscape, 4:3
+wire rotate_active = (rotate_osd == 2'b01) || (rotate_osd == 2'b11);
+assign VIDEO_ARX  = rotate_active ? 13'd3 : 13'd4;
+assign VIDEO_ARY  = rotate_active ? 13'd4 : 13'd3;
 
 //////////////////////////////////////////////////////////////////
 // Activity LED

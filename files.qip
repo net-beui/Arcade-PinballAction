@@ -19,6 +19,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE rtl/pbaction_fg.v
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/pbaction_bg.v
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/pbaction_sprites.v
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/pbaction_palette.v
+set_global_assignment -name VERILOG_FILE sys/arcade_video.v
 
 # Memory primitives
 set_global_assignment -name VERILOG_FILE       rtl/dpram.v
